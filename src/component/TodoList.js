@@ -1,9 +1,13 @@
-import { useRef } from "react";
+import React, { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { create, done } from "./../store/modules/todo";
+import { create, done } from "../store/modules/todo";
 
-export default function TodoList() {
-  const list = useSelector((state) => state.todo.list);
+function TodoList() {
+  const list = useSelector((state) => state.todo.list).filter(
+    (el) => el.done === false
+  );
+  const nextID = useSelector((state) => state.todo.nextID);
+
   const inputRef = useRef();
   const dispatch = useDispatch();
   return (
@@ -13,7 +17,7 @@ export default function TodoList() {
         <input type="text" ref={inputRef} />
         <button
           onClick={() => {
-            dispatch(create({ id: list.length, text: inputRef.current.value }));
+            dispatch(create({ id: nextID, text: inputRef.current.value }));
             inputRef.current.value = "";
           }}
         >
@@ -28,3 +32,4 @@ export default function TodoList() {
     </section>
   );
 }
+export default TodoList;

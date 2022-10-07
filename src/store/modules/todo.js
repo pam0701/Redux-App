@@ -17,24 +17,11 @@ export function done(id) {
 }
 // 초기 상태 설정
 const initState = {
-  list: [
-    {
-      id: 0,
-      text: "리액트 공부하기",
-      done: false,
-    },
-    {
-      id: 1,
-      text: "척추의 요정이 말합니다 : 척추 펴기!",
-      done: false,
-    },
-    {
-      id: 2,
-      text: "취업 하기",
-      done: false,
-    },
-  ],
+  // 초기 상태 설정
 };
+
+let counts = initState.list.length;
+initState["nextID"] = counts;
 
 // 리듀서 설정(실제 작업은 이친구가 합니다!)
 export default function todo(state = initState, action) {
